@@ -1,7 +1,7 @@
 package entities;
 
 public class Account {
-    private String name;
+    private String holder;
     private int number;
     private double balance;
 
@@ -9,24 +9,24 @@ public class Account {
 
     }
 
-    public Account(String nome, int number, double balance) {
-        this.name = nome;
+    public Account(String holder, int number, double initialDeposit) {
+        this.holder = holder;
         this.number = number;
-        this.balance = balance;
+        deposit(initialDeposit);
     }
 
-    public Account(String nome, int number) {
-        this.name = nome;
+    public Account(String holder, int number) {
+        this.holder = holder;
         this.number = number;
 
     }
 
-    public String getName() {
-        return name;
+    public String getHolder() {
+        return holder;
     }
 
-    public void setName(String nome) {
-        this.name = nome;
+    public void setHolder(String nome) {
+        this.holder = holder;
     }
 
     public int getNumber() {
@@ -37,21 +37,17 @@ public class Account {
         return balance;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public void deposit(double ammount){
+        this.balance += ammount;
     }
-
-    public void deposit(double value){
-        this.balance += value;
-    }
-    public void withdraw(double value){
-        this.balance -= value;
+    public void withdraw(double ammount){
+        this.balance -= ammount + 5.0;
     }
     public String toString(){
         return "Account " + number
                 + ", Holder: "
-                + name
+                + holder
                 + ", Balance: $ "
-                + balance;
+                + String.format("%.2f", balance);
     }
 }

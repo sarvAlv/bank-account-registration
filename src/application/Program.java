@@ -9,8 +9,6 @@ public class Program {
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
-        double balance = 0;
-
 
         System.out.print("Enter account number: ");
         int number = sc.nextInt();
@@ -19,28 +17,31 @@ public class Program {
         System.out.print("Enter account holder: ");
         String holder = sc.nextLine();
 
-        Account account = new Account(holder, number);
+        Account account;
         System.out.print("Is there na initial deposit (y/n)? ");
-        String r = sc.nextLine();
-        if (r.equalsIgnoreCase("y")) {
+        char response = sc.nextLine().charAt(0);
+        if (response == 'y') {
             System.out.print("Enter initial deposit value: ");
-            balance = sc.nextDouble();
-            account.setBalance(balance);
+            double initialDeposit = sc.nextDouble();
+            account = new Account(holder, number, initialDeposit);
+        }
+        else {
+            account = new Account(holder, number);
         }
         System.out.println();
-        System.out.printf("Account data: %n" + account);
+        System.out.println("Account data: %n" + account + "%n");
 
         System.out.println();
         System.out.print("Enter a deposit value: ");
-        balance = sc.nextDouble();
-        account.deposit(balance);
-        System.out.printf("Update account data: %n" + account);
+        double depositValue = sc.nextDouble();
+        account.deposit(depositValue);
+        System.out.printf("Update account data: %n" + account + "%n");
 
         System.out.println();
         System.out.print("Enter a withdraw value: ");
-        balance = sc.nextDouble();
-        account.withdraw(balance);
-        System.out.printf("Update account data: %n" + account);
+        double withdraw = sc.nextDouble();
+        account.withdraw(withdraw);
+        System.out.printf("Update account data: %n" + account + "%n");
 
         sc.close();
     }
